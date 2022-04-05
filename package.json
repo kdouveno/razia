@@ -1,16 +1,33 @@
 {
-  "name": "bot-razia",
+  "name": "mercrezik",
   "version": "1.0.0",
-  "description": "A bot for twitch streamer raziahatel",
+  "description": "",
   "main": "main.js",
-  "dependencies": {
-    "open": "^8.4.0",
-    "tmi.js": "^1.8.5"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdouveno/razia.git"
+  },
+  "keywords": [
+    "twitch_bot"
+  ],
+  "author": "kdouveno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kdouveno/razia/issues"
+  },
+  "homepage": "https://github.com/kdouveno/razia#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/preset-react": "^7.16.7"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "open": "^8.4.0",
+    "socket.io": "^4.4.1",
+    "tmi.js": "^1.8.5"
+  }
 }
