@@ -1,9 +1,9 @@
 
 
 class SongEntry{
-	constructor(user, link){
+	constructor(userName, link){
 		this.submitTime = Date.now();
-		this.user = user;
+		this.userName = userName;
 		this.link = link;
 		this.coupDeCoeur = false;
 		this.played = false;

@@ -1,0 +1,36 @@
+h1{text-align: center;}
+.song_entry{
+	--song-height: 2rem;
+	border-bottom: 1px solid black;
+	justify-content: space-between;
+	display: flex;
+	height: calc(var(--song-height) * 1.2);
+}
+.song_entry:last-child{
+	border: none;
+}
+.song_entry>div:first-child{
+	
+}
+.link{
+	height: calc(var(--song-height) * 0.7 * 1.2);
+	font-size: calc(var(--song-height) * 0.7);
+	/* font-size: calc(var(--song-height) * 0.7); */
+}
+.poster{
+	height: calc(var(--song-height) * 0.3 * 1.2);
+	font-size: calc(var(--song-height) * 0.3);
+}
+.interactions{
+}
+.interactions>div{
+	display: inline-block;
+	width: calc(var(--song-height) * 1.2);
+	height: calc(var(--song-height) * 1.2);
+	text-align: center;
+	line-height: calc(var(--song-height) * 1.2);
+}
+.checked{
+	background-color: black;
+	color: white;
+}

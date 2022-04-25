@@ -10,7 +10,7 @@ class Mercrezik {
 		})
 	}
 	getCurrentSong() {
-		var out = playList.find((o) => {
+		var out = this.playList.find((o) => {
 			return !o.played;
 		});
 		return out;
@@ -36,6 +36,14 @@ class Mercrezik {
 			this.playList.filter((o)=>{
 				return o.link !== index;
 			});
+	}
+	playNext(){
+		var csong = this.getCurrentSong();
+		if (csong) {
+			open(csong.link);
+			csong.played = true;
+		}
+		io.emit('mercrezik', mercrezik);
 	}
 }
 module.exports = Mercrezik;

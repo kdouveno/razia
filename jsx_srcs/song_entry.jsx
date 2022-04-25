@@ -1,8 +1,38 @@
-class SongEntry extends React.component {
+class SongEntry extends React.Component {
 	constructor(props){
-		this.props = props.entry;
+		super(props);
+
+		this.coupDeCoeur = this.coupDeCoeur.bind(this);
+		this.played = this.played.bind(this);
+	}
+	coupDeCoeur() {
+		socket.emit("updateEntry", {type: "coupDeCoeur", index: this.props.i});
+	}
+	played() {
+		socket.emit("updateEntry", {type: "played", index: this.props.i});
 	}
 	render() {
-		return <div>{`${this.props.link}, ${this.props.userName}, ${this.props.submitTime}`}</div>
+		var entry = this.props.entry;
+		var submitTime = new Date(entry.submitTime);
+		return <div className="song_entry">
+			<div>
+				<div className="link">
+					<a href={entry.link}>{entry.link}</a>
+				</div>
+				<div className="poster">
+					{"posté par "}
+					<span>{entry.userName}</span>
+					{" à "}
+					<span>{(submitTime.getHours() + "h" + submitTime.getMinutes())}</span>
+				</div>
+			</div>
+			<div className="interactions">
+				<div onClick={this.coupDeCoeur} className={entry.coupDeCoeur ? "checked" : ""}>♥</div>
+				<div>del</div>
+				<div onClick={this.played} className={entry.played ? "checked" : ""}>►</div>
+				<div>═</div>
+			</div>
+		</div>
 	}
+	// {`${entry.link}, ${entry.userName}, ${entry.submitTime}`}
 }

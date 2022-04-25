@@ -15,9 +15,13 @@ module.exports = () =>
 	app.use(express.static('html_server/public'));
 	
 	io.on('connection', (socket) => {
-		emitMercrezik = () => {
-			socket.emit('mercrezik', mercrezik);
-		};
+		emitMercrezik = () => {io.emit('mercrezik', mercrezik)};
+		socket.on("updateEntry", (u)=>{
+			console.log(u, mercrezik);
+			if (u.type === "coupDeCoeur" || u.type === "played")
+				mercrezik.playList[u.index][u.type] = !mercrezik.playList[u.index][u.type];
+			emitMercrezik();
+		});
 
 		emitMercrezik();
 	});

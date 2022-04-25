@@ -28,7 +28,17 @@ module.exports = () => {
 		var cmdArgs = msg.split(" ").filter((s) => { return s !== "" });
 		var argCount = cmdArgs.length - 1;
 		const commandName = cmdArgs[0];
-
+		const addedSong = (res)=>{
+			if (res.success){
+				client.say(target, `merci ${target} pour ton ajout${q ? "questionnable" : ""}`);
+			} else {
+				var remainingTime = mercrezik.individualTimeout - res.elapsedTime;
+				if (remainingTime < 0)
+					client.say(target, $`Désolé ${target}, mais il tu dois attendre ${remainingTime / 1000} pour pouvoir reposter un son :'(`);
+				else
+					client.say(target, `Ce message ne devrait jamais s'afficher xD`);
+			}
+		}
 		// If the command is known, let's execute it
 		if (commandName === '!dice') {
 			const num = rollDice();
@@ -37,28 +47,17 @@ module.exports = () => {
 		} else if (commandName === "!zik") {
 			if (argCount == 1 || argCount == 2) {
 				var q = cmdArgs[2] === "questionnable";
-				var out = mercrezik.addSong(context.username, cmdArgs[1], q);
-				if (out.success){
-					client.say(target, `merci ${target} pour ton ajout${q ? "questionnable" : ""}`);
-				} else {
-					var remainingTime = mercrezik.individualTimeout - out.elapsedTime;
-					if (remainingTime < 0)
-						client.say(target, $`Désolé ${target}, mais il tu dois attendre ${remainingTime / 1000} pour pouvoir reposter un son :'(`);
-					else
-						client.say(target, `Ce message ne devrait jamais s'afficher xD`);
-				}
+				addedSong(mercrezik.addSong(context.username, cmdArgs[1], q));
 			}
 		} else if (commandName === "!next") {
-			var csong = getCurrentSong();
-			if (csong) {
-				open(csong.link);
-				csong.played = true;
-			}
+			mercrezik.playNext();
 		} else if (commandName === "!coeur") {
 			var csong = getCurrentSong();
 			if (csong) {
 				csong.coupDeCoeur = true;
 			}
+		// } else if (commandName === "!ecouteca") {
+		// 	addedSong(mercrezik.addSong(context.username, cmdArgs[1], q, true));
 		} else if (commandName === "!list") {
 
 		} else
