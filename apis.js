@@ -30,11 +30,28 @@ const apis = {
 		var match = url.match(regExp);
 		return (match&&match[7].length==11)? match[7] : false;
 	},
-	getSong(url, succ, err){
+	youtubeTimeParser(ytTime){
+		var out = ytTime.match(/PT[0-9]/);
+		return new Date((out[1] * 60 + out[2]) * 1000);
+	},
+	getSong(url, succ, err = (err)=>{
+		console.log(err);
+		throw err;
+	}){
 		var id;
 		
-		if (id = this.youtubeParser(url))
-			this.getYoutubeVideo(id, succ, err);
+		if (id = this.youtubeParser(url)) {
+			this.getYoutubeVideo(id, (data)=>{
+				data = JSON.parse(data).items[0];
+				console.log(data);
+
+				succ({
+					title: data.snippet.title,
+					channel: data.snippet.channelTitle,
+					duration: this.youtubeTimeParser(data.contentDetails.duration)
+				})
+			}, err);
+		}
 		else
 			console.log("provided url isn't supported");
 	}

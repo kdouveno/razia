@@ -17,7 +17,7 @@ class SongEntry extends React.Component {
 		return <div className="song_entry">
 			<div>
 				<div className="link">
-					<a href={entry.link}>{entry.link}</a>
+					<a href={entry.song.title}>{entry.song.link}</a>
 				</div>
 				<div className="poster">
 					{"posté par "}
@@ -34,5 +34,5 @@ class SongEntry extends React.Component {
 			</div>
 		</div>
 	}
-	// {`${entry.link}, ${entry.userName}, ${entry.submitTime}`}
+	// {`${entry.song.link}, ${entry.userName}, ${entry.submitTime}`}
 }
