@@ -47,7 +47,7 @@ module.exports = () => {
 		} else if (commandName === "!zik") {
 			if (argCount == 1 || argCount == 2) {
 				var q = cmdArgs[2] === "questionnable";
-				mercrezik.addSong(context.username, cmdArgs[1], q);
+				mercrezik.addSong(context.username, cmdArgs[1], q, err=>{});
 			}
 		} else if (commandName === "!next") {
 			mercrezik.playNext();

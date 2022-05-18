@@ -4,6 +4,7 @@ class SongEntry extends React.Component {
 
 		this.coupDeCoeur = this.coupDeCoeur.bind(this);
 		this.played = this.played.bind(this);
+		console.log(props.entry);
 	}
 	coupDeCoeur() {
 		socket.emit("updateEntry", {type: "coupDeCoeur", index: this.props.i});
@@ -17,7 +18,7 @@ class SongEntry extends React.Component {
 		return <div className="song_entry">
 			<div>
 				<div className="link">
-					<a href={entry.song.title}>{entry.song.link}</a>
+					<a href={entry.song.link}>{entry.song.title}</a>
 				</div>
 				<div className="poster">
 					{"posté par "}

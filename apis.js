@@ -39,11 +39,10 @@ const apis = {
 		throw err;
 	}){
 		var id;
-		
+
 		if (id = this.youtubeParser(url)) {
 			this.getYoutubeVideo(id, (data)=>{
 				data = JSON.parse(data).items[0];
-				console.log(data);
 
 				succ({
 					title: data.snippet.title,

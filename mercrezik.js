@@ -28,8 +28,8 @@ class Mercrezik {
 
 		apis.getSong(link, (data)=>{
 			this.playList.push(new ListEntry(userName, link, doubtful, data));
-			io.emit('mercrezik', mercrezik);
-		});
+			io.emit('mercrezik', this);
+		}, err);
 
 
 		return out;
@@ -45,7 +45,7 @@ class Mercrezik {
 	playNext(){
 		var csong = this.getCurrentSong();
 		if (csong) {
-			open(csong.link);
+			open(csong.song.link);
 			csong.played = true;
 		}
 		io.emit('mercrezik', mercrezik);
