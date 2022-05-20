@@ -1,12 +1,22 @@
 body{
 	margin: 0;
+	--header-height: 50px;
 }
 #header{
 	position: fixed;
-	height: 50px;
+	height: var(--header-height);
 	width: 100vw;
 	display: flex;
 	justify-content: space-between;
+	padding: 5px;
+	background-color: black;
+	color: white;
+}
+#header_filler{
+	height: var(--header-height);
+}
+#list{
+	padding: 15px;
 }
 #playNext{
 	margin: 10px;
@@ -21,9 +31,7 @@ body{
 .song_entry:last-child{
 	border: none;
 }
-.song_entry>div:first-child{
-	
-}
+
 .link{
 	height: calc(var(--song-height) * 0.7 * 1.2);
 	font-size: calc(var(--song-height) * 0.7);
