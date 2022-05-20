@@ -18,9 +18,14 @@ module.exports = () =>
 		emitMercrezik = () => {io.emit('mercrezik', mercrezik)};
 		socket.on("updateEntry", (u)=>{
 			console.log(u, mercrezik);
-			if (u.type === "coupDeCoeur" || u.type === "played")
+			if (u.type.match(/(coupDeCoeur)|(played)/))
 				mercrezik.playList[u.index][u.type] = !mercrezik.playList[u.index][u.type];
+			else if (u.type === "remove")
+				mercrezik.removeSong(u.index);
 			emitMercrezik();
+		});
+		socket.on("play next", ()=>{
+	mercrezik.play
 		});
 
 		emitMercrezik();

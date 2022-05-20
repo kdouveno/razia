@@ -4,6 +4,7 @@ class SongEntry extends React.Component {
 
 		this.coupDeCoeur = this.coupDeCoeur.bind(this);
 		this.played = this.played.bind(this);
+		this.removeSong = this.removeSong.bind(this);
 		console.log(props.entry);
 	}
 	coupDeCoeur() {
@@ -12,13 +13,16 @@ class SongEntry extends React.Component {
 	played() {
 		socket.emit("updateEntry", {type: "played", index: this.props.i});
 	}
+	removeSong() {
+		socket.emit("updateEntry", {type: "remove", index: this.props.i});
+	}
 	render() {
 		var entry = this.props.entry;
 		var submitTime = new Date(entry.submitTime);
-		return <div className="song_entry">
+		return <div className={"song_entry"} id={this.props.isNext ? "nextSong" : ""}>
 			<div>
 				<div className="link">
-					<a href={entry.song.link}>{entry.song.title}</a>
+					<a href={entry.song.link} target="_blank">{entry.song.title}</a>
 				</div>
 				<div className="poster">
 					{"posté par "}
@@ -29,8 +33,8 @@ class SongEntry extends React.Component {
 			</div>
 			<div className="interactions">
 				<div onClick={this.coupDeCoeur} className={entry.coupDeCoeur ? "checked" : ""}>♥</div>
-				<div>del</div>
-				<div onClick={this.played} className={entry.played ? "checked" : ""}>►</div>
+				<div onClick={this.removeSong}>del</div>
+				<div onClick={this.played} className={"played " + (entry.played ? "checked" : "")}>►</div>
 				<div>═</div>
 			</div>
 		</div>

@@ -1,4 +1,16 @@
-h1{text-align: center;}
+body{
+	margin: 0;
+}
+#header{
+	position: fixed;
+	height: 50px;
+	width: 100vw;
+	display: flex;
+	justify-content: space-between;
+}
+#playNext{
+	margin: 10px;
+}
 .song_entry{
 	--song-height: 2rem;
 	border-bottom: 1px solid black;

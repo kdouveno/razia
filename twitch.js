@@ -45,9 +45,11 @@ module.exports = () => {
 			client.say(target, `You rolled a ${num}`);
 			console.log(`* Executed ${commandName} command`);
 		} else if (commandName === "!zik") {
-			if (argCount == 1 || argCount == 2) {
+			if (argCount === 1 || argCount === 2 || argCount === 3) {
 				var q = cmdArgs[2] === "questionnable";
-				mercrezik.addSong(context.username, cmdArgs[1], q, err=>{});
+				var p = cmdArgs[3] === "prio";
+
+				mercrezik.addSong(context.username, cmdArgs[1], q, p, err=>{});
 			}
 		} else if (commandName === "!next") {
 			mercrezik.playNext();

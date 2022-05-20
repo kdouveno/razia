@@ -7,4 +7,9 @@ socket.on('mercrezik', (m)=>{
 		list.update(m);
 })
 const list = ReactDOM.render(<List mercrezik={undefined} />, document.getElementById('list'));
+function playNext(){
+	var e = document.getElementById("nextSong");
+	e.querySelector("a").click();
+	e.querySelector(".played").click();
+}
 

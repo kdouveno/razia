@@ -9,13 +9,17 @@ class Mercrezik {
 			get: this.getCurrentSong
 		})
 	}
-	getCurrentSong() {
-		var out = this.playList.find((o) => {
-			return !o.played;
+	getCurrentSong(getIndex = false) {
+		var index;
+		var out = this.playList.find((o, i) => {
+			var test = !o.played;
+			if (getIndex && test)
+				index = i;
+			return test;
 		});
-		return out;
+		return getIndex ? index : out;
 	}
-	addSong(userName, link, doubtful = false, err){
+	addSong(userName, link, doubtful = false,  prio = false, err){
 		var out =  {success: true, elapsedTime: Date.now() - this.tbu[userName]};
 		if (this.tbu[userName])
 		{
@@ -27,7 +31,11 @@ class Mercrezik {
 		this.tbu[userName] = Date.now();
 
 		apis.getSong(link, (data)=>{
-			this.playList.push(new ListEntry(userName, link, doubtful, data));
+			var newEntry = new ListEntry(userName, link, doubtful, prio, data);
+			if (prio)
+				this.playList.splice(this.getCurrentSong(true), 0, newEntry);
+			else
+				this.playList.push(newEntry);
 			io.emit('mercrezik', this);
 		}, err);
 
