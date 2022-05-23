@@ -34,7 +34,9 @@ const apis = {
 		var out = ytTime.match(/PT([0-9]*)M?([0-9]*)S/);
 		console.log(out);
 		out[1] = out[1] ?? 0;
-		return new Date((out[1] * 60 + out[2]) * 1000);
+		if(out[2].length == 1)
+			out[2] = "0" + out[2];
+		return out[1] + ":" + out[2];
 	},
 	getSong(url, succ, err = (err)=>{
 		console.log(err);

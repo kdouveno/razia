@@ -1,6 +1,7 @@
 body{
 	margin: 0;
 	--header-height: 50px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 #header{
 	position: fixed;
@@ -22,11 +23,15 @@ body{
 	margin: 10px;
 }
 .song_entry{
-	--song-height: 2rem;
+	--song-height: .8cm;
 	border-bottom: 1px solid black;
 	justify-content: space-between;
 	display: flex;
 	height: calc(var(--song-height) * 1.2);
+}
+.song_entry>div:first-child{
+	flex-shrink: 1;
+	overflow: hidden;
 }
 .song_entry:last-child{
 	border: none;
@@ -35,20 +40,33 @@ body{
 .link{
 	height: calc(var(--song-height) * 0.7 * 1.2);
 	font-size: calc(var(--song-height) * 0.7);
+	overflow: hidden;
 	/* font-size: calc(var(--song-height) * 0.7); */
+}
+.link a{
+	height: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .poster{
 	height: calc(var(--song-height) * 0.3 * 1.2);
 	font-size: calc(var(--song-height) * 0.3);
 }
+.poster span{
+	font-weight: bolder;
+}
 .interactions{
+	display: flex;
+	flex-shrink: 0;
 }
 .interactions>div{
-	display: inline-block;
 	width: calc(var(--song-height) * 1.2);
 	height: calc(var(--song-height) * 1.2);
 	text-align: center;
 	line-height: calc(var(--song-height) * 1.2);
+}
+.interactions>.duration{
+	text-align: right;
 }
 .checked{
 	background-color: black;
