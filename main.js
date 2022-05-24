@@ -1,4 +1,3 @@
-const config = require('./config.js')
 tmi = require('tmi.js');
 ListEntry = require('./listEntry.js');
 open = require('open');

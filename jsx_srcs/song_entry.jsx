@@ -5,7 +5,7 @@ class SongEntry extends React.Component {
 		this.coupDeCoeur = this.coupDeCoeur.bind(this);
 		this.played = this.played.bind(this);
 		this.removeSong = this.removeSong.bind(this);
-		console.log(props.entry);
+		this.play = this.play.bind(this);
 	}
 	dateToYtDuration(date){
 		date = new Date(date);
@@ -22,8 +22,9 @@ class SongEntry extends React.Component {
 	}
 	removeSong() {
 		socket.emit("updateEntry", {type: "remove", index: this.props.i});
-		var date = new Date(0);
-		date.getse
+	}
+	play() {
+		socket.emit("updateEntry", {type: "play", index: this.props.i});
 	}
 	render() {
 		var entry = this.props.entry;
@@ -35,7 +36,7 @@ class SongEntry extends React.Component {
 		return <div className={"song_entry"} id={this.props.isNext ? "nextSong" : ""}>
 			<div>
 				<div className="link">
-					<a href={entry.song.link} target="_blank">{entry.song.title}</a>
+					<a onClick={this.play} href={entry.song.link} target="_blank">{entry.song.title}</a>
 				</div>
 				<div className="poster">
 					{"posté par "}
