@@ -1,0 +1,4 @@
+module.exports = {
+	ZIK_TIMEOUT: 5000,
+	BETWEEN_SONG_TIMEOUT: 20000
+}

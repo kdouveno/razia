@@ -1,13 +1,21 @@
 const apis = require("./apis");
-
+const config = require("./config");
 class Mercrezik {
 	constructor(){
-		this.individualTimeout = 5000;
 		this.playList = [];
+		this.lastPlayed = Date.now();
+		this.EEoS = Date.now();
 		this.tbu = {}; // Timer Blocked Users
 		Object.defineProperty(this, "csong", {
 			get: this.getCurrentSong
 		})
+	}
+	getCumulDuration(){
+		this.playList.reduce((t, o)=>{
+			var out = o.song.duration.split(":");
+			var out = (out[0] * 60 + out[1]) * 1000 + config.BETWEEN_SONG_TIMEOUT;
+			return t + (o.played ? 0 : out);
+		}, 0);
 	}
 	getCurrentSong(getIndex = false) {
 		var index;
@@ -23,7 +31,7 @@ class Mercrezik {
 		var out =  {success: true, elapsedTime: Date.now() - this.tbu[userName]};
 		if (this.tbu[userName])
 		{
-			if (out.elapsedTime < this.individualTimeout) {
+			if (out.elapsedTime < config.ZIK_TIMEOUT) {
 				out.success = false;
 				return out;
 			}
@@ -49,6 +57,14 @@ class Mercrezik {
 			this.playList.filter((o)=>{
 				return o.song.link !== index;
 			});
+	}
+	play(index){
+		var song = this.playList[index];
+		if (song){
+
+			song.played = true;
+		}
+		csong.played = true;
 	}
 	playNext(){
 		var csong = this.getCurrentSong();
